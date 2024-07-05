@@ -1,0 +1,54 @@
+.header {
+    position: relative;
+}
+
+.header__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    margin: 1em;
+    padding-bottom: 1em;
+}
+
+.logo {
+    min-width: 30px;
+    font-size: 1.3em;
+}
+
+.logo__image {
+    width: 100%;
+}
+
+.header__nav {
+    width: 100%;
+}
+
+.header__nav__list {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.header__wallpaper {
+    position: relative;
+    margin: 1em 0;
+    background: url("/images/main.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 80svh;
+    background-blend-mode: multiply;
+    background-color: #bcbcbc;
+    border-radius: 10px;
+    position: relative;
+}
+
+header .header__wallpaper::after {
+    content: "Аренда SUP в Рязани";
+    position: absolute;
+    top: 1em;
+    left: 20%;
+    font-size: 1.2rem;
+}

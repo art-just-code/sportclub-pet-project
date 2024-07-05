@@ -4,11 +4,9 @@ import { Footer } from "./components/Footer/Footer";
 export const App = (props: any) => {
     return (
         <>
-            <section>
-                <Header />
-                {props.children}
-                <Footer />
-            </section>
+            <Header />
+            {props.children}
+            <Footer />
         </>
     );
 };
