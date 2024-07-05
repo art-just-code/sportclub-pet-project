@@ -1,4 +1,15 @@
 :root {
+    /* colors */
+    --color-text: #ffffff;
+    --color-placeholder: rgba(255, 255, 255, 0.5);
+    --color-additional: #93b1ff;
+    --color-additional7: rgba(147, 177, 255, 0.7);
+    --background-color-calendar: #3a3e42;
+    --background-color-calendar-header: #575c63;
+
+    /* images */
+    --images-arrow: url(/images/arrow.svg);
+
     --max-width: 1100px;
     --border-radius: 12px;
     --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",

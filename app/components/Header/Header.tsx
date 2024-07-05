@@ -4,6 +4,7 @@ import Styles from "./Header.module.css";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaChevronDown } from "react-icons/fa";
 
 export const Header = () => {
     const pathname = usePathname();
@@ -16,7 +17,7 @@ export const Header = () => {
                             <Link href="/about">О нас</Link>
                         </li>
                         <li>
-                            <Link href="/">Расписание</Link> {/* позже сделать тут якорь на расписание */}
+                            <Link href="#schedule">Расписание</Link> {/* позже сделать тут якорь на расписание */}
                         </li>
                         <li>
                             <Link href="/contacts">Контакты</Link>
@@ -24,7 +25,12 @@ export const Header = () => {
                     </ul>
                 </nav>
             </div>
-            <div className={Styles["header__wallpaper"]}></div>
+            <div className={Styles["header__wallpaper"]}>
+                <h1 className={Styles["title"]}>Аренда SUP в Рязани</h1>
+                <Link href="#schedule">
+                    <FaChevronDown className={Styles["header__arrow"]} />
+                </Link>
+            </div>
         </header>
     );
 };
