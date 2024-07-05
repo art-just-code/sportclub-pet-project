@@ -10,7 +10,7 @@
     border-radius: 5px 5px 0 0;
     background-color: var(--background-color-calendar-header);
     color: var(--color-text);
-    padding: 10px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,7 +41,7 @@
 .calendar__week__names {
     height: 20px;
     font-weight: 600;
-    font-size: 8px;
+    font-size: 0.8em;
     color: var(--color-additional);
     text-align: center;
     align-items: center;
@@ -51,7 +51,7 @@
 }
 
 .calendar__days {
-    font-size: 10px;
+    font-size: 1em;
     font-weight: 400;
     color: var(--color-text);
     text-align: center;

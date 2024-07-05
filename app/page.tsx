@@ -14,6 +14,14 @@ export default function Home() {
                 selectDate={setSelectedDate}
                 selectedDate={selectedDate}
             />
+            <Calendar
+                selectDate={setSelectedDate}
+                selectedDate={selectedDate}
+            />
+            <Calendar
+                selectDate={setSelectedDate}
+                selectedDate={selectedDate}
+            />
         </main>
     );
 }
