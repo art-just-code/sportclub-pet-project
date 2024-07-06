@@ -6,21 +6,28 @@ import { Calendar } from "./components/Calendar/Calendar";
 import { useState } from "react";
 
 export default function Home() {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [currentDate, setSelectedDate] = useState(new Date());
+    const currentMonth = currentDate.getMonth();
+
+    //console.log(new Date(currentYear, 5, 1));
+
     return (
         <main className={Styles["main"]}>
             <h3 id="schedule">График аренды</h3>
             <Calendar
                 selectDate={setSelectedDate}
-                selectedDate={selectedDate}
+                currentDate={currentDate}
+                currentMonth={currentMonth === 5 ? currentMonth : 5}
             />
             <Calendar
                 selectDate={setSelectedDate}
-                selectedDate={selectedDate}
+                currentDate={currentDate}
+                currentMonth={currentMonth === 6 ? currentMonth : 6}
             />
             <Calendar
                 selectDate={setSelectedDate}
-                selectedDate={selectedDate}
+                currentDate={currentDate}
+                currentMonth={currentMonth === 7 ? currentMonth : 7}
             />
         </main>
     );

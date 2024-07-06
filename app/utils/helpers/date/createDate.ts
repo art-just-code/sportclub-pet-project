@@ -10,6 +10,7 @@ export const createDate = (params?: CreateDateParams) => {
     const locale = params?.locale ?? "default"; // оператор ?? нулевого слияния
 
     const d = params?.date ?? new Date();
+
     const dayNumber = d.getDate();
     const day = d.toLocaleDateString(locale, { weekday: "long" });
     const dayNumberInWeek = d.getDay() + 1;

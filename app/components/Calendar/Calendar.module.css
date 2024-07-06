@@ -12,25 +12,9 @@
     color: var(--color-text);
     padding: 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    cursor: pointer;
     box-shadow: 0px 2px 10px -1px rgba(0, 0, 0, 0.2);
-}
-
-.calendar__header__arrow-left {
-    width: 10px;
-    height: 15px;
-    cursor: pointer;
-    color: var(--color-additional);
-}
-
-.calendar__header__arrow-right {
-    width: 10px;
-    height: 15px;
-    cursor: pointer;
-    transform: rotate(-180deg);
-    color: var(--color-additional);
 }
 
 .calendar__body {

@@ -3,24 +3,22 @@ import { createDate, createMonth, getMonthNumberOfDays, getMonthesNames, getWeek
 
 interface UseCalendarParams {
     locale?: string;
-    selectedDate: Date;
+    currentDate: Date;
     firstWeekDay: number;
+    currentMonth: number;
 }
 
-const getYearsInterval = (year: number) => {
-    // получаем интервал лет
-    const startYear = Math.floor(year / 10) * 10;
-    return [...Array(10)].map((_, index) => startYear + index);
-};
-
-export const useCalendar = ({ firstWeekDay = 2, locale = "default", selectedDate: date }: UseCalendarParams) => {
-    const [mode, setMode] = useState<"days" | "monthes" | "years">("days"); // в <> описываем возможные значени для mode, в () по умолчанию
+export const useCalendar = ({
+    firstWeekDay = 2,
+    locale = "default",
+    currentDate: date,
+    currentMonth,
+}: UseCalendarParams) => {
     const [selectedDate, setSelectedDate] = useState(createDate({ date }));
     const [selectedMonth, setSelectedMonth] = useState(
-        createMonth({ date: new Date(selectedDate.year, selectedDate.monthIndex), locale })
+        createMonth({ date: new Date(selectedDate.year, currentMonth), locale })
     );
     const [selectedYear, setSelectedYear] = useState(selectedDate.year);
-    const [selectedYearInterval, setSelectedYearInterval] = useState(getYearsInterval(selectedDate.year));
 
     const monthesNames = useMemo(() => getMonthesNames(locale), []); // используем дальше useMemo, чтобы эти сущности не рендерились каждый раз
     const weekDaysNames = useMemo(() => getWeekDaysNames(firstWeekDay, locale), []);
@@ -77,66 +75,21 @@ export const useCalendar = ({ firstWeekDay = 2, locale = "default", selectedDate
         return result;
     }, [selectedMonth.year, selectedMonth.monthIndex, selectedYear]);
 
-    const onClickArrow = (direction: "right" | "left") => {
-        if (mode === "years" && direction === "left") {
-            return setSelectedYearInterval(getYearsInterval(selectedYearInterval[0] - 10));
-        }
-
-        if (mode === "years" && direction === "right") {
-            return setSelectedYearInterval(getYearsInterval(selectedYearInterval[0] + 10));
-        }
-
-        if (mode === "monthes" && direction === "left") {
-            const year = selectedYear - 1;
-            if (!selectedYearInterval.includes(year)) setSelectedYearInterval(getYearsInterval(year));
-            return setSelectedYear(year);
-        }
-
-        if (mode === "monthes" && direction === "right") {
-            const year = selectedYear + 1;
-            if (!selectedYearInterval.includes(year)) setSelectedYearInterval(getYearsInterval(year));
-            return setSelectedYear(year);
-        }
-
-        if (mode === "days") {
-            const monthIndex = direction === "left" ? selectedMonth.monthIndex - 1 : selectedMonth.monthIndex + 1;
-
-            if (monthIndex === -1) {
-                const year = selectedYear - 1;
-                setSelectedYear(year);
-                if (!selectedYearInterval.includes(year)) setSelectedYearInterval(getYearsInterval(year));
-                return setSelectedMonth(createMonth({ date: new Date(year, 11), locale }));
-            }
-
-            if (monthIndex === 12) {
-                const year = selectedYear + 1;
-                setSelectedYear(year);
-                if (!selectedYearInterval.includes(year)) setSelectedYearInterval(getYearsInterval(year));
-                return setSelectedMonth(createMonth({ date: new Date(year, 0), locale }));
-            }
-            return setSelectedMonth(createMonth({ date: new Date(selectedYear, monthIndex), locale }));
-        }
-    };
-
     const setSelectedMonthByIndex = (monthIndex: number) => {
         setSelectedMonth(createMonth({ date: new Date(selectedYear, monthIndex), locale }));
     };
 
     return {
         state: {
-            mode,
             calendarDays,
             weekDaysNames,
             monthesNames,
             selectedDate,
             selectedMonth,
             selectedYear,
-            selectedYearInterval,
         },
         functions: {
-            setMode,
             setSelectedDate,
-            onClickArrow,
             setSelectedMonthByIndex,
             setSelectedYear,
         },

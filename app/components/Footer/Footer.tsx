@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
     return <footer className="footer">copyrights</footer>;
 };

@@ -4,26 +4,25 @@ import Styles from "./Header.module.css";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaViber } from "react-icons/fa";
+import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaBars, FaPhone, FaRegUser } from "react-icons/fa";
+import { NavBar } from "../NavBar/NavBar";
+import { useState } from "react";
 
-export const Header = () => {
+export const Header: React.FC = () => {
+    const [isNavVisible, setIsNavVisible] = useState(false);
     const pathname = usePathname();
     return (
         <header className={Styles["header"]}>
             <div className={Styles["header__inner"]}>
-                <nav className={Styles["header__nav"]}>
-                    <ul className={Styles["list"]}>
-                        <li className={Styles["nav__list__item"]}>
-                            <Link href="/terms">Условия</Link>
-                        </li>
-                        <li className={Styles["nav__list__item"]}>
-                            <Link href="/#schedule">Расписание</Link> {/* позже сделать тут якорь на расписание */}
-                        </li>
-                        <li className={Styles["nav__list__item"]}>
-                            <Link href="/about">О нас</Link>
-                        </li>
-                    </ul>
-                </nav>
+                <FaBars
+                    className={Styles["header__bars"]}
+                    onClick={() => setIsNavVisible(!isNavVisible)}
+                />
+                {isNavVisible && <NavBar />}
+                <a href="tel:+79209509943">
+                    <FaPhone />
+                </a>
+                <FaRegUser />
             </div>
             <div className={Styles["header__wallpaper"]}>
                 <div className={Styles["container"]}>
