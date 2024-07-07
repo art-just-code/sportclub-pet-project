@@ -2,6 +2,9 @@
 import { useCalendar } from "@/app/utils/hooks/useCalendar";
 import Styles from "./Calendar.module.css";
 import { checkDateIsEqual, checkIsToday } from "@/app/utils/helpers/date";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/lib/store";
+import { select } from "@/lib/features/selectDate/selectDate";
 
 interface CalendarParams {
     locale?: string;
@@ -20,13 +23,15 @@ export const Calendar: React.FC<CalendarParams> = ({
 }) => {
     const { state, functions } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth });
 
-    //console.log("state.calendarDays", state.calendarDays);
+    const storeDate = useSelector((state: RootState) => state.selectDate);
+    const dispatch = useDispatch<AppDispatch>();
+    //console.log("storeDate", storeDate);
 
     return (
         <div className={Styles["calendar"]}>
             <div className={Styles["calendar__header"]}>
                 <h3>
-                    {state.monthesNames[state.selectedMonth.monthIndex].month} {state.selectedYear}
+                    {state.monthesNames[state.selectedMonth.monthIndex].month} {state.currentYear}
                 </h3>
             </div>
             <div className={Styles["calendar__body"]}>
@@ -44,9 +49,12 @@ export const Calendar: React.FC<CalendarParams> = ({
                             <div
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 onClick={() => {
-                                    functions.setSelectedDate(day);
+                                    console.log(day.date);
+                                    dispatch(select(day.date.toString()));
+                                    /* functions.setSelectedDate(day);
                                     selectDate(day.date); // надо подумать, как сделать так, чтобы выбрать можно было только один день на 3х месяцах
                                     // добавить обработку нажатия на день и выводить информацию о брони на конкретный день
+                                     */
                                 }}
                                 className={`${Styles["calendar__day"]}
                                         ${isToday ? Styles["calendar__today__item"] : ""} 
