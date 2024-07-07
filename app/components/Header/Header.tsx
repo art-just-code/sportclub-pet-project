@@ -3,14 +3,19 @@
 import Styles from "./Header.module.css";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaBars, FaPhone, FaRegUser } from "react-icons/fa";
 import { NavBar } from "../NavBar/NavBar";
-import { useState } from "react";
+import { Overlay } from "../Overlay/Overlay";
+import { Popup } from "../Popup/Popup";
+import { AuthForm } from "../AuthForm/AuthForm";
 
 export const Header: React.FC = () => {
     const [isNavVisible, setIsNavVisible] = useState(false);
+
     const pathname = usePathname();
+
     return (
         <header className={Styles["header"]}>
             <div className={Styles["header__inner"]}>
@@ -22,7 +27,6 @@ export const Header: React.FC = () => {
                 <a href="tel:+79209509943">
                     <FaPhone />
                 </a>
-                <FaRegUser />
             </div>
             <div className={Styles["header__wallpaper"]}>
                 <div className={Styles["container"]}>
@@ -40,12 +44,19 @@ export const Header: React.FC = () => {
                         </li>
                     </ul>
                 </div>
-                <div className={Styles["container"]}>
-                    <Link href="#schedule">Выбрать дату</Link>
-                    <Link href="#schedule">
-                        <FaChevronDown className={Styles["header__arrow"]} />
-                    </Link>
-                </div>
+                <Link
+                    className={Styles["header__toschedule__btn"]}
+                    href="/#schedule"
+                >
+                    Выбрать дату
+                </Link>
+                {pathname === "/" && (
+                    <div className={Styles["container"]}>
+                        <Link href="/#schedule">
+                            <FaChevronDown className={Styles["header__arrow"]} />
+                        </Link>
+                    </div>
+                )}
             </div>
         </header>
     );

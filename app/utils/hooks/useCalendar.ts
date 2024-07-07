@@ -18,25 +18,25 @@ export const useCalendar = ({
     const [selectedMonth, setSelectedMonth] = useState(
         createMonth({ date: new Date(selectedDate.year, currentMonth), locale })
     );
-    const [selectedYear, setSelectedYear] = useState(selectedDate.year);
+    const currentYear = date.getFullYear();
 
     const monthesNames = useMemo(() => getMonthesNames(locale), []); // используем дальше useMemo, чтобы эти сущности не рендерились каждый раз
     const weekDaysNames = useMemo(() => getWeekDaysNames(firstWeekDay, locale), []);
 
-    const days = useMemo(() => selectedMonth.createMonthDays(), [selectedMonth, selectedYear]); // в массив зависимостей передаются значения также как в useEffect - при изменении их эначений будет происходить перерендер
+    const days = useMemo(() => selectedMonth.createMonthDays(), []); // в массив зависимостей передаются значения также как в useEffect - при изменении их эначений будет происходить перерендер
 
     // механизм расчета того, сколько дней необходимо отрисовывать с прошлого и следующего месяцев
     const calendarDays = useMemo(() => {
         //получаем - сколько в данном месяце дней
-        const monthNumberOfDays = getMonthNumberOfDays(selectedMonth.monthIndex, selectedYear);
+        const monthNumberOfDays = getMonthNumberOfDays(selectedMonth.monthIndex, currentYear);
         // получаем количество дней в предыдущем месяце
         const prevMonthDays = createMonth({
-            date: new Date(selectedYear, selectedMonth.monthIndex - 1),
+            date: new Date(currentYear, selectedMonth.monthIndex - 1),
             locale,
         }).createMonthDays();
         // получаем количество дней в следующем месяце
         const nextMonthDays = createMonth({
-            date: new Date(selectedYear, selectedMonth.monthIndex + 1),
+            date: new Date(currentYear, selectedMonth.monthIndex + 1),
             locale,
         }).createMonthDays();
 
@@ -73,10 +73,10 @@ export const useCalendar = ({
         }
 
         return result;
-    }, [selectedMonth.year, selectedMonth.monthIndex, selectedYear]);
+    }, [selectedMonth.year, selectedMonth.monthIndex]);
 
     const setSelectedMonthByIndex = (monthIndex: number) => {
-        setSelectedMonth(createMonth({ date: new Date(selectedYear, monthIndex), locale }));
+        setSelectedMonth(createMonth({ date: new Date(currentYear, monthIndex), locale }));
     };
 
     return {
@@ -86,12 +86,11 @@ export const useCalendar = ({
             monthesNames,
             selectedDate,
             selectedMonth,
-            selectedYear,
+            currentYear,
         },
         functions: {
             setSelectedDate,
             setSelectedMonthByIndex,
-            setSelectedYear,
         },
     };
 };

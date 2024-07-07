@@ -45,7 +45,8 @@ export const Calendar: React.FC<CalendarParams> = ({
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 onClick={() => {
                                     functions.setSelectedDate(day);
-                                    selectDate(day.date); // надо подумать, как сделать так, чтобы выбрать можно было только один день
+                                    selectDate(day.date); // надо подумать, как сделать так, чтобы выбрать можно было только один день на 3х месяцах
+                                    // добавить обработку нажатия на день и выводить информацию о брони на конкретный день
                                 }}
                                 className={`${Styles["calendar__day"]}
                                         ${isToday ? Styles["calendar__today__item"] : ""} 
