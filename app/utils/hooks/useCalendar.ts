@@ -3,7 +3,7 @@ import { createDate, createMonth, getMonthNumberOfDays, getMonthesNames, getWeek
 
 interface UseCalendarParams {
     locale?: string;
-    currentDate: Date;
+    currentDate?: Date;
     firstWeekDay: number;
     currentMonth: number;
 }
@@ -11,7 +11,7 @@ interface UseCalendarParams {
 export const useCalendar = ({
     firstWeekDay = 2,
     locale = "default",
-    currentDate: date,
+    currentDate: date = new Date(),
     currentMonth,
 }: UseCalendarParams) => {
     const [selectedDate, setSelectedDate] = useState(createDate({ date }));
@@ -75,10 +75,6 @@ export const useCalendar = ({
         return result;
     }, [selectedMonth.year, selectedMonth.monthIndex]);
 
-    const setSelectedMonthByIndex = (monthIndex: number) => {
-        setSelectedMonth(createMonth({ date: new Date(currentYear, monthIndex), locale }));
-    };
-
     return {
         state: {
             calendarDays,
@@ -87,10 +83,6 @@ export const useCalendar = ({
             selectedDate,
             selectedMonth,
             currentYear,
-        },
-        functions: {
-            setSelectedDate,
-            setSelectedMonthByIndex,
         },
     };
 };

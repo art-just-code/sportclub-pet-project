@@ -1,6 +1,7 @@
 "use client";
-import { useCalendar } from "@/app/utils/hooks/useCalendar";
 import Styles from "./Calendar.module.css";
+
+import { useCalendar } from "@/app/utils/hooks/useCalendar";
 import { checkDateIsEqual, checkIsToday } from "@/app/utils/helpers/date";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/lib/store";
@@ -8,24 +9,23 @@ import { select } from "@/lib/features/selectDate/selectDate";
 
 interface CalendarParams {
     locale?: string;
-    currentDate: Date;
+    currentDate?: Date;
     currentMonth: number;
-    selectDate: (date: Date) => void; // описание функции, которая будет принимать date и возвращать что-то
     firstWeekDay?: number;
 }
 
 export const Calendar: React.FC<CalendarParams> = ({
     locale = "default",
     firstWeekDay = 2,
-    selectDate,
     currentDate,
     currentMonth,
 }) => {
-    const { state, functions } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth });
+    const { state } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth }); // functions - лишнее?
 
     const storeDate = useSelector((state: RootState) => state.selectDate);
     const dispatch = useDispatch<AppDispatch>();
-    //console.log("storeDate", storeDate);
+
+    console.log("storeDate.date", storeDate.date);
 
     return (
         <div className={Styles["calendar"]}>
@@ -43,18 +43,13 @@ export const Calendar: React.FC<CalendarParams> = ({
                 <div className={Styles["calendar__days"]}>
                     {state.calendarDays.map((day) => {
                         const isToday = checkIsToday(day.date);
-                        const isSelectedDay = checkDateIsEqual(day.date, state.selectedDate.date);
+                        const isSelectedDay = checkDateIsEqual(day.date, new Date(storeDate.date)); // отрисовывая календарь, проверяет, выбрана ли конкретная дата
                         const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex;
                         return (
                             <div
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 onClick={() => {
-                                    console.log(day.date);
-                                    dispatch(select(day.date.toString()));
-                                    /* functions.setSelectedDate(day);
-                                    selectDate(day.date); // надо подумать, как сделать так, чтобы выбрать можно было только один день на 3х месяцах
-                                    // добавить обработку нажатия на день и выводить информацию о брони на конкретный день
-                                     */
+                                    dispatch(select(day.date.toDateString()));
                                 }}
                                 className={`${Styles["calendar__day"]}
                                         ${isToday ? Styles["calendar__today__item"] : ""} 
