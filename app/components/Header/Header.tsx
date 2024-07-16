@@ -7,9 +7,6 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaBars, FaPhone, FaRegUser } from "react-icons/fa";
 import { NavBar } from "../NavBar/NavBar";
-import { Overlay } from "../Overlay/Overlay";
-import { Popup } from "../Popup/Popup";
-import { AuthForm } from "../AuthForm/AuthForm";
 
 export const Header: React.FC = () => {
     const [isNavVisible, setIsNavVisible] = useState(false);

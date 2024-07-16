@@ -12,6 +12,7 @@ interface CalendarParams {
     currentDate?: Date;
     currentMonth: number;
     firstWeekDay?: number;
+    openPopup: () => void;
 }
 
 export const Calendar: React.FC<CalendarParams> = ({
@@ -19,13 +20,14 @@ export const Calendar: React.FC<CalendarParams> = ({
     firstWeekDay = 2,
     currentDate,
     currentMonth,
+    openPopup,
 }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth }); // functions - лишнее?
 
     const storeDate = useSelector((state: RootState) => state.selectDate);
     const dispatch = useDispatch<AppDispatch>();
 
-    console.log("storeDate.date", storeDate.date);
+    console.log(`render Calendar ${currentMonth}`);
 
     return (
         <div className={Styles["calendar"]}>
@@ -50,6 +52,7 @@ export const Calendar: React.FC<CalendarParams> = ({
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 onClick={() => {
                                     dispatch(select(day.date.toDateString()));
+                                    openPopup();
                                 }}
                                 className={`${Styles["calendar__day"]}
                                         ${isToday ? Styles["calendar__today__item"] : ""} 
