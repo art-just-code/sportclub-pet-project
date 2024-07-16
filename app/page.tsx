@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Calendar } from "./components/Calendar/Calendar";
 import { Overlay } from "./components/Overlay/Overlay";
 import { Popup } from "./components/Popup/Popup";
-import { AuthForm } from "./components/AuthForm/AuthForm";
+import { RentForm } from "./components/RentForm/RentForm";
 
 export default function Home() {
     const [popupIsOpened, setPopupIsOpened] = useState(false);
@@ -35,7 +35,7 @@ export default function Home() {
                 isOpened={popupIsOpened}
                 close={closePopup}
             >
-                <AuthForm />
+                <RentForm />
             </Popup>
         </main>
     );

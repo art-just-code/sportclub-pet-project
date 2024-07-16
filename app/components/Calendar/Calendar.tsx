@@ -24,7 +24,7 @@ export const Calendar: React.FC<CalendarParams> = ({
 }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth }); // functions - лишнее?
 
-    const storeDate = useSelector((state: RootState) => state.selectDate);
+    const { date } = useSelector((state: RootState) => state.selectDate);
     const dispatch = useDispatch<AppDispatch>();
 
     console.log(`render Calendar ${currentMonth}`);
@@ -45,13 +45,13 @@ export const Calendar: React.FC<CalendarParams> = ({
                 <div className={Styles["calendar__days"]}>
                     {state.calendarDays.map((day) => {
                         const isToday = checkIsToday(day.date);
-                        const isSelectedDay = checkDateIsEqual(day.date, new Date(storeDate.date)); // отрисовывая календарь, проверяет, выбрана ли конкретная дата
+                        const isSelectedDay = checkDateIsEqual(day.date, new Date(date)); // отрисовывая календарь, проверяет, выбрана ли конкретная дата
                         const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex;
                         return (
                             <div
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 onClick={() => {
-                                    dispatch(select(day.date.toDateString()));
+                                    dispatch(select(day.date.toLocaleDateString(locale)));
                                     openPopup();
                                 }}
                                 className={`${Styles["calendar__day"]}

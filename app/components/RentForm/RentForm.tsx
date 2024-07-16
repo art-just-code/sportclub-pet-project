@@ -1,38 +1,46 @@
 "use client";
-import Styles from "./AuthForm.module.css";
+import Styles from "./RentForm.module.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
-export const AuthForm: React.FC = () => {
-    const [authData, setAuthData] = useState({ email: "", password: "" });
+export const RentForm: React.FC = () => {
+    const { date } = useSelector((state: RootState) => state.selectDate);
+    const [rentData, setRentData] = useState({ phone: "", count: "" });
     const [message, setMessage] = useState({ status: null, text: null });
+
     const handleInput = () => {};
     const handleSubmit = async () => {};
+
+    const freeCount = 9; // статика, позже возьмем остаток из бд
 
     return (
         <form
             onSubmit={handleSubmit}
             className={Styles["form"]}
         >
-            <h2 className={Styles["form__title"]}>Авторизация</h2>
+            <h2 className={Styles["form__title"]}>Окно аренды на {date}</h2>
             <div className={Styles["form__fields"]}>
                 <label className={Styles["form__field"]}>
-                    <span className={Styles["form__field-title"]}>Email</span>
+                    <span className={Styles["form__field-title"]}>Ваш номер телефона</span>
                     <input
                         onInput={handleInput}
                         className={Styles["form__field-input"]}
-                        name="email"
-                        type="email"
-                        placeholder="hello@world.com"
+                        name="phone"
+                        type="tel"
+                        placeholder="+79*********"
                     />
                 </label>
                 <label className={Styles["form__field"]}>
-                    <span className={Styles["form__field-title"]}>Пароль</span>
+                    <span className={Styles["form__field-title"]}>Сколько вам нужно комплектов?</span>
                     <input
                         onInput={handleInput}
                         className={Styles["form__field-input"]}
-                        type="password"
-                        name="password"
-                        placeholder="***********"
+                        type="number"
+                        name="count"
+                        placeholder={`Осталось ${freeCount} штук`}
+                        min={1}
+                        max={freeCount}
                     />
                 </label>
             </div>
@@ -48,7 +56,7 @@ export const AuthForm: React.FC = () => {
                     className={Styles["form__submit"]}
                     type="submit"
                 >
-                    Войти
+                    Перейти к предоплате
                 </button>
             </div>
         </form>
