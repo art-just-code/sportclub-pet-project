@@ -6,18 +6,12 @@ import { DayItem } from "../DayItem/DayItem";
 
 interface CalendarParams {
     locale?: string;
-    currentDate?: Date;
     currentMonth: number;
     firstWeekDay?: number;
 }
 
-export const Calendar: React.FC<CalendarParams> = ({
-    locale = "default",
-    firstWeekDay = 2,
-    currentDate,
-    currentMonth,
-}) => {
-    const { state } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth }); // functions - лишнее?
+export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWeekDay = 2, currentMonth }) => {
+    const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // functions - лишнее?
 
     console.log(`render Calendar ${currentMonth}`);
 
@@ -41,7 +35,7 @@ export const Calendar: React.FC<CalendarParams> = ({
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
                                 date={day.date}
                                 monthIndex={day.monthIndex}
-                                selectedMonthIndex={state.selectedMonth.monthIndex}
+                                selectedMonthIndex={currentMonth}
                                 dayNumber={day.dayNumber}
                                 locale={locale}
                             />

@@ -1,23 +1,16 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { createDate, createMonth, getMonthNumberOfDays, getMonthesNames, getWeekDaysNames } from "../helpers/date";
 
 interface UseCalendarParams {
     locale?: string;
-    currentDate?: Date;
     firstWeekDay: number;
     currentMonth: number;
 }
 
-export const useCalendar = ({
-    firstWeekDay = 2,
-    locale = "default",
-    currentDate: date = new Date(),
-    currentMonth,
-}: UseCalendarParams) => {
-    const [selectedDate, setSelectedDate] = useState(createDate({ date }));
-    const [selectedMonth, setSelectedMonth] = useState(
-        createMonth({ date: new Date(selectedDate.year, currentMonth), locale })
-    );
+export const useCalendar = ({ firstWeekDay = 2, locale = "default", currentMonth }: UseCalendarParams) => {
+    const date = new Date();
+    const selectedDate = createDate({ date });
+    const selectedMonth = createMonth({ date: new Date(selectedDate.year, currentMonth), locale });
     const currentYear = date.getFullYear();
 
     const monthesNames = useMemo(() => getMonthesNames(locale), []); // используем дальше useMemo, чтобы эти сущности не рендерились каждый раз

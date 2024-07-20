@@ -1,8 +1,8 @@
 import Styles from "./DayItem.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/lib/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
 import { selectDate } from "@/lib/features/selectDate/selectDate";
-import { checkDateIsEqual, checkIsToday } from "@/app/utils/helpers/date";
+import { checkIsToday } from "@/app/utils/helpers/date";
 
 interface DayItemParams {
     date: Date;
@@ -13,13 +13,11 @@ interface DayItemParams {
 }
 
 export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMonthIndex, dayNumber, locale }) => {
-    //const { storeDate } = useSelector((state: RootState) => state.selectDate); // лишнее?
     const dispatch = useDispatch<AppDispatch>();
 
     const isToday = checkIsToday(date);
-    //const isSelectedDay = checkDateIsEqual(date, new Date(storeDate));
     const isAdditionalDay = monthIndex !== selectedMonthIndex;
-    console.log(`render ${dayNumber}`);
+    //console.log(`render ${dayNumber}`);
     return (
         <div
             onClick={() => {
