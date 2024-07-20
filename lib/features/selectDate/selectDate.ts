@@ -9,12 +9,11 @@ const initialState: selectDateState = {
 };
 
 const selectDateSlice = createSlice({
-    name: "selectDate",
+    name: "storeDate",
     initialState,
     reducers: {
         selectDate: (state, actions: PayloadAction<string>) => {
             state.storeDate = actions.payload; // payload - полезная нагрузка
-            //console.log(state.date); // typeof state - Proxy(Object) typeof state.date - string
         },
     },
 });

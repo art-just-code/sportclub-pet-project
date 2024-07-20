@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 
 export const RentForm: React.FC = () => {
-    const { date } = useSelector((state: RootState) => state.selectDate);
+    const { storeDate } = useSelector((state: RootState) => state.selectDate);
     const [rentData, setRentData] = useState({ phone: "", count: "" });
     const [message, setMessage] = useState({ status: null, text: null });
 
@@ -19,7 +19,7 @@ export const RentForm: React.FC = () => {
             onSubmit={handleSubmit}
             className={Styles["form"]}
         >
-            <h2 className={Styles["form__title"]}>Окно аренды на {date}</h2>
+            <h2 className={Styles["form__title"]}>Окно аренды на {storeDate}</h2>
             <div className={Styles["form__fields"]}>
                 <label className={Styles["form__field"]}>
                     <span className={Styles["form__field-title"]}>Ваш номер телефона</span>

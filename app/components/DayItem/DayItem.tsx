@@ -1,8 +1,9 @@
 import Styles from "./DayItem.module.css";
+import { checkIsToday } from "@/app/utils/helpers/date";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { selectDate } from "@/lib/features/selectDate/selectDate";
-import { checkIsToday } from "@/app/utils/helpers/date";
+import { changePopupIsOpen } from "@/lib/features/showPopup/showPopup";
 
 interface DayItemParams {
     date: Date;
@@ -22,6 +23,7 @@ export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMon
         <div
             onClick={() => {
                 dispatch(selectDate(date.toLocaleDateString(locale)));
+                dispatch(changePopupIsOpen(true));
             }}
             className={`${Styles["calendar__day"]}
             ${isToday ? Styles["calendar__today__item"] : ""} 

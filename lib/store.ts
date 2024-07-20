@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import selectDateSlice from "./features/selectDate/selectDate";
-import isAuthSlice from "./features/isAuth/isAuth";
+import changePopupIsOpenSlice from "./features/showPopup/showPopup";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             selectDate: selectDateSlice,
-            isAuth: isAuthSlice,
+            popupIsOpened: changePopupIsOpenSlice,
         },
     });
 };
