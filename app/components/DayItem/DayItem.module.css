@@ -1,0 +1,16 @@
+.calendar__day {
+    border-radius: 5px;
+    padding: 5.5px 0;
+    cursor: pointer;
+}
+
+.calendar__day:hover {
+    background-color: var(--color-additional7);
+}
+
+.calendar__additional__day {
+    padding: 5.5px;
+    font-weight: 300;
+    cursor: pointer;
+    color: var(--color-placeholder);
+}

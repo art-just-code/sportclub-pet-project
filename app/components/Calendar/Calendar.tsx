@@ -2,17 +2,13 @@
 import Styles from "./Calendar.module.css";
 
 import { useCalendar } from "@/app/utils/hooks/useCalendar";
-import { checkDateIsEqual, checkIsToday } from "@/app/utils/helpers/date";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/lib/store";
-import { select } from "@/lib/features/selectDate/selectDate";
+import { DayItem } from "../DayItem/DayItem";
 
 interface CalendarParams {
     locale?: string;
     currentDate?: Date;
     currentMonth: number;
     firstWeekDay?: number;
-    openPopup: () => void;
 }
 
 export const Calendar: React.FC<CalendarParams> = ({
@@ -20,12 +16,8 @@ export const Calendar: React.FC<CalendarParams> = ({
     firstWeekDay = 2,
     currentDate,
     currentMonth,
-    openPopup,
 }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentDate, currentMonth }); // functions - лишнее?
-
-    const { date } = useSelector((state: RootState) => state.selectDate);
-    const dispatch = useDispatch<AppDispatch>();
 
     console.log(`render Calendar ${currentMonth}`);
 
@@ -44,23 +36,15 @@ export const Calendar: React.FC<CalendarParams> = ({
                 </div>
                 <div className={Styles["calendar__days"]}>
                     {state.calendarDays.map((day) => {
-                        const isToday = checkIsToday(day.date);
-                        const isSelectedDay = checkDateIsEqual(day.date, new Date(date)); // отрисовывая календарь, проверяет, выбрана ли конкретная дата
-                        const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex;
                         return (
-                            <div
+                            <DayItem
                                 key={`${day.dayNumber} - ${day.monthIndex}`}
-                                onClick={() => {
-                                    dispatch(select(day.date.toLocaleDateString(locale)));
-                                    openPopup();
-                                }}
-                                className={`${Styles["calendar__day"]}
-                                        ${isToday ? Styles["calendar__today__item"] : ""} 
-                                        ${isSelectedDay ? Styles["calendar__selected__item"] : ""}
-                                        ${isAdditionalDay ? Styles["calendar__additional__day"] : ""}`}
-                            >
-                                {day.dayNumber}
-                            </div>
+                                date={day.date}
+                                monthIndex={day.monthIndex}
+                                selectedMonthIndex={state.selectedMonth.monthIndex}
+                                dayNumber={day.dayNumber}
+                                locale={locale}
+                            />
                         );
                     })}
                 </div>

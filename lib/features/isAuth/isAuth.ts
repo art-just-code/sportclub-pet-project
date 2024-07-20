@@ -12,12 +12,12 @@ const isAuthSlice = createSlice({
     name: "isAuth",
     initialState,
     reducers: {
-        select: (state, actions: PayloadAction<Boolean>) => {
+        changeIsAuth: (state, actions: PayloadAction<Boolean>) => {
             state.isAuth = actions.payload;
         },
     },
 });
 
-export const { select } = isAuthSlice.actions;
+export const { changeIsAuth } = isAuthSlice.actions;
 
 export default isAuthSlice.reducer;
