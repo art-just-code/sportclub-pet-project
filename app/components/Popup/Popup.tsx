@@ -8,7 +8,7 @@ import { AppDispatch } from "@/lib/store";
 import { changePopupIsOpen } from "@/lib/features/showPopup/showPopup";
 
 interface PopupParams {
-    children: any; // позже понять, какой тип правильно указывать для children
+    children: React.ReactNode; // позже понять, какой тип правильно указывать для children
 }
 
 export const Popup: React.FC<PopupParams> = ({ children }) => {

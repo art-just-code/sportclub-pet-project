@@ -13,7 +13,7 @@ interface CalendarParams {
 export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWeekDay = 2, currentMonth }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // functions - лишнее?
 
-    console.log(`render Calendar ${currentMonth}`);
+    console.log(`Was rendered Calendar ${currentMonth}`);
 
     return (
         <div className={Styles["calendar"]}>
