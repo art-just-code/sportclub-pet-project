@@ -13,17 +13,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-.form__field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 0.7em;
+    font-size: 0.7em;
 }
 
 .form__field-title {
-    margin-bottom: 8px;
-    font-size: 0.7em;
+    margin-bottom: 0.7em;
 }
 
 .form__field-input {
@@ -32,10 +27,11 @@
     border-radius: 4px;
     padding: 5%;
     font-family: inherit;
-    font-size: 0.7em;
+    margin-bottom: 0.7em;
 }
 
 .form__message {
+    color: #8d3b1e;
     margin-bottom: 20px;
 }
 
