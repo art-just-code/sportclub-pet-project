@@ -9,10 +9,15 @@ export const RentForm: React.FC = () => {
     const [rentData, setRentData] = useState({ phone: "", count: "" });
     const [message, setMessage] = useState({ status: null, text: null });
 
-    const handleInput = () => {};
-    const handleSubmit = async () => {};
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setRentData({ ...rentData, [e.target.name]: e.target.value });
+    };
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(rentData);
+    };
 
-    const freeCount = 9; // статика, позже возьмем остаток из бд
+    const freeCount = 7; // статика, позже возьмем остаток из бд
 
     return (
         <form
@@ -56,7 +61,8 @@ export const RentForm: React.FC = () => {
                     className={Styles["form__submit"]}
                     type="submit"
                 >
-                    Перейти к предоплате
+                    <p>Сделать заказ</p>
+                    <p>(мы напишем вам)</p>
                 </button>
             </div>
         </form>
