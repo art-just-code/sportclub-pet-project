@@ -30,14 +30,14 @@ export const RentForm: React.FC = () => {
         >
             <h2 className={Styles["form__title"]}>Окно аренды на {storeDate}</h2>
             <div className={Styles["form__fields"]}>
-                <label className={Styles["form__field-title"]}>Ваш номер телефона</label>
+                <label className={Styles["form__field-title"]}>Ваш номер мобильного телефона</label>
                 <input
                     onChange={(e) => handleInput(e)}
                     value={rentData.phone}
                     className={Styles["form__field-input"]}
                     name="phone"
                     type="tel"
-                    placeholder="+79*********"
+                    placeholder="79********* без + и -, пробелов и скобок"
                 />
                 {errors.phone && <p className={Styles["form__message"]}>{errors.phone}</p>}
                 <label className={Styles["form__field-title"]}>Сколько вам нужно комплектов?</label>
