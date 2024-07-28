@@ -9,7 +9,6 @@ export default function Home() {
             className={Styles["main"]}
             id="schedule"
         >
-            <Calendar currentMonth={6} />
             <Calendar currentMonth={7} />
             <Calendar currentMonth={8} />
         </main>

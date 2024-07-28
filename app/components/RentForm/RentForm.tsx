@@ -7,7 +7,7 @@ import { isFormDataValid } from "@/app/utils/helpers/validation/isFormDataValid"
 
 export const RentForm: React.FC = () => {
     const { storeDate } = useSelector((state: RootState) => state.selectDate);
-    const [rentData, setRentData] = useState({ phone: "", count: "" });
+    const [rentData, setRentData] = useState({ phone: "", count: "", date: "" });
     const [errors, setErrors] = useState({ phone: "", count: "" });
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,12 +57,13 @@ export const RentForm: React.FC = () => {
                 <button
                     className={Styles["form__reset"]}
                     type="reset"
-                    onClick={() => setRentData({ phone: "", count: "" })}
+                    onClick={() => setRentData({ ...rentData, phone: "", count: "" })}
                 >
-                    Очистить
+                    Очистить поля
                 </button>
                 <button
                     className={Styles["form__submit"]}
+                    onClick={() => setRentData({ ...rentData, date: storeDate })}
                     type="submit"
                 >
                     <p>Сделать заказ</p>
