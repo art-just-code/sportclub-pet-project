@@ -11,9 +11,9 @@ interface CalendarParams {
 }
 
 export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWeekDay = 2, currentMonth }) => {
-    const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // functions - лишнее?
+    const { state } = useCalendar({ firstWeekDay, locale, currentMonth });
 
-    console.log(`Calendar ${currentMonth} render`);
+    //console.log(`data`, data);
 
     return (
         <div className={Styles["calendar"]}>
