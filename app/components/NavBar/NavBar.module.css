@@ -1,0 +1,46 @@
+@keyframes showNav {
+    0% {
+        left: -170px;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+.nav {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 1;
+    padding: 5px 5px 0 0;
+    animation-name: showNav;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    list-style: none;
+}
+
+.nav__list__item {
+    transition: transform 0.5s ease;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.nav__list li:first-child {
+    max-width: 70px;
+}
+
+.nav__list li:last-child {
+    max-width: 80px;
+}
+
+.nav__list__item:hover {
+    transform: scale(1.1);
+}
