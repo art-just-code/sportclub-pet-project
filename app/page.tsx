@@ -2,12 +2,9 @@
 
 import Styles from "./page.module.css";
 import { Calendar } from "./components/Calendar/Calendar";
-import { useGetData } from "./api/api-hooks";
-import { endpoints } from "./api/config";
 
 export default function Home() {
-    const data = useGetData(endpoints.dates);
-    console.log(data);
+    /* здесь должно быть получение данных конфигураций и функция, не прошел ли месяц*/
 
     return (
         <main
