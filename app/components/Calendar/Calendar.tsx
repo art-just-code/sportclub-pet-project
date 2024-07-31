@@ -26,32 +26,34 @@ export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWe
                     {state.monthesNames[state.selectedMonth.monthIndex].month} {state.currentYear}
                 </h3>
             </div>
-            {data ? (
-                <div className={Styles["calendar__body"]}>
-                    <div className={Styles["calendar__week__names"]}>
-                        {state.weekDaysNames.map((weekDaysNames) => (
-                            <div key={weekDaysNames.dayShort}>{weekDaysNames.dayShort}</div>
-                        ))}
-                    </div>
-                    <div className={Styles["calendar__days"]}>
-                        {state.calendarDays.map((day) => {
-                            /* const isRental = data[day.dateString] доработать проверку */
-                            return (
-                                <DayItem
-                                    key={`${day.dayNumber} - ${day.monthIndex}`}
-                                    date={day.date}
-                                    monthIndex={day.monthIndex}
-                                    selectedMonthIndex={currentMonth}
-                                    dayNumber={day.dayNumber}
-                                    locale={locale}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
-            ) : (
-                <Preloader />
-            )}
+            <div className={Styles["calendar__body"]}>
+                {data ? (
+                    <>
+                        <div className={Styles["calendar__week__names"]}>
+                            {state.weekDaysNames.map((weekDaysNames) => (
+                                <div key={weekDaysNames.dayShort}>{weekDaysNames.dayShort}</div>
+                            ))}
+                        </div>
+                        <div className={Styles["calendar__days"]}>
+                            {state.calendarDays.map((day) => {
+                                /* const isRental = data[day.dateString] доработать проверку */
+                                return (
+                                    <DayItem
+                                        key={`${day.dayNumber} - ${day.monthIndex}`}
+                                        date={day.date}
+                                        monthIndex={day.monthIndex}
+                                        selectedMonthIndex={currentMonth}
+                                        dayNumber={day.dayNumber}
+                                        locale={locale}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </>
+                ) : (
+                    <Preloader />
+                )}
+            </div>
         </div>
     );
 };

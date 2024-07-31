@@ -20,6 +20,8 @@
 .calendar__body {
     border-radius: 0 0 5px 5px;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 .calendar__week__names {
