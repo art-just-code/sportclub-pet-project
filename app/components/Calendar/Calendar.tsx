@@ -4,7 +4,7 @@ import Styles from "./Calendar.module.css";
 import { useCalendar } from "@/app/utils/hooks/useCalendar";
 import { Preloader } from "../Preloader/Preloader";
 import { DayItem } from "../DayItem/DayItem";
-import { useGetData } from "@/app/api/api-hooks";
+import { useGetDataByMonth } from "@/app/api/api-hooks";
 import { endpoints } from "@/app/api/config";
 
 interface CalendarParams {
@@ -15,9 +15,8 @@ interface CalendarParams {
 
 export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWeekDay = 2, currentMonth }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentMonth });
-    const data = useGetData(endpoints.dates);
-
-    //data && console.log(`data array`, Object.keys(data));
+    const julyData = useGetDataByMonth(endpoints.dates, "july");
+    const augustData = useGetDataByMonth(endpoints.dates, "august");
 
     return (
         <div className={Styles["calendar"]}>
@@ -27,7 +26,7 @@ export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWe
                 </h3>
             </div>
             <div className={Styles["calendar__body"]}>
-                {data ? (
+                {julyData ? (
                     <>
                         <div className={Styles["calendar__week__names"]}>
                             {state.weekDaysNames.map((weekDaysNames) => (
