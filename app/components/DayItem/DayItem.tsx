@@ -11,6 +11,7 @@ interface DayItemParams {
     selectedMonthIndex: number;
     dayNumber: number;
     locale: string;
+    rentData: number;
 }
 
 export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMonthIndex, dayNumber, locale }) => {
@@ -18,7 +19,7 @@ export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMon
 
     const isToday = checkIsToday(date);
     const isAdditionalDay = monthIndex !== selectedMonthIndex;
-    //console.log(`render ${dayNumber}`);
+    //console.log(date.toLocaleDateString(locale));
     return (
         <div
             onClick={() => {

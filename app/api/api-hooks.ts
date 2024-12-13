@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getNormalizedDataByMonth } from "./api-utils";
 
 export const useGetDataByMonth = (endpoint: string, month: string) => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {

@@ -9,14 +9,28 @@ import { endpoints } from "@/app/api/config";
 
 interface CalendarParams {
     locale?: string;
-    currentMonth: number;
     firstWeekDay?: number;
+    currentMonth: number;
+    monthName: string;
 }
 
-export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWeekDay = 2, currentMonth }) => {
-    const { state } = useCalendar({ firstWeekDay, locale, currentMonth });
-    const julyData = useGetDataByMonth(endpoints.dates, "july");
-    const augustData = useGetDataByMonth(endpoints.dates, "august");
+type RentData = {
+    date?: string;
+    current?: number;
+    month?: any; // позже убрать
+    user?: any; // позже убрать
+};
+
+export const Calendar: React.FC<CalendarParams> = ({
+    locale = "default",
+    firstWeekDay = 2,
+    currentMonth,
+    monthName,
+}) => {
+    const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // хук создания календаря
+    const data: Array<RentData> = useGetDataByMonth(endpoints.dates, monthName); // получение данных для конкретного месяца, добавить мемоизацию?
+    console.log(data);
+    //if (data.length > 0) const rentData: Array<RentData> = data.map((obj) => {date = obj.date, current = obj.current});
 
     return (
         <div className={Styles["calendar"]}>
@@ -26,7 +40,7 @@ export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWe
                 </h3>
             </div>
             <div className={Styles["calendar__body"]}>
-                {julyData ? (
+                {data ? (
                     <>
                         <div className={Styles["calendar__week__names"]}>
                             {state.weekDaysNames.map((weekDaysNames) => (
@@ -35,7 +49,6 @@ export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWe
                         </div>
                         <div className={Styles["calendar__days"]}>
                             {state.calendarDays.map((day) => {
-                                /* const isRental = data[day.dateString] доработать проверку */
                                 return (
                                     <DayItem
                                         key={`${day.dayNumber} - ${day.monthIndex}`}
@@ -44,6 +57,7 @@ export const Calendar: React.FC<CalendarParams> = ({ locale = "default", firstWe
                                         selectedMonthIndex={currentMonth}
                                         dayNumber={day.dayNumber}
                                         locale={locale}
+                                        rentData={2}
                                     />
                                 );
                             })}
