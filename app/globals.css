@@ -11,6 +11,13 @@
     --images-arrow: url(/images/arrow.svg);
 }
 
+@font-face {
+    font-family: "Anonymous Pro";
+    src: url(/fonts/MarckScript-Regular.ttf);
+    font-weight: normal;
+    font-display: swap;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -19,6 +26,7 @@
 
 html,
 body {
+    font-family: "Anonymous Pro", serif;
     max-width: 100vw;
     overflow-x: hidden;
 }

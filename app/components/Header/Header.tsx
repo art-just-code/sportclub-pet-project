@@ -5,7 +5,7 @@ import Styles from "./Header.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaBars, FaPhone, FaRegUser } from "react-icons/fa";
+import { FaChevronDown, FaWhatsapp, FaTelegramPlane, FaBars, FaPhone } from "react-icons/fa";
 import { NavBar } from "../NavBar/NavBar";
 
 export const Header: React.FC = () => {

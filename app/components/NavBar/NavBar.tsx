@@ -6,6 +6,9 @@ export const NavBar: React.FC = () => {
         <nav className={Styles["nav"]}>
             <ul className={Styles["nav__list"]}>
                 <li className={Styles["nav__list__item"]}>
+                    <Link href="/">Главная</Link>
+                </li>
+                <li className={Styles["nav__list__item"]}>
                     <Link href="/terms">Условия</Link>
                 </li>
                 <li className={Styles["nav__list__item"]}>

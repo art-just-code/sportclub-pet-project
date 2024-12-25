@@ -12,10 +12,6 @@ export default function Home() {
     /* здесь должно быть получение данных конфигураций и функция, не прошел ли месяц*/
     const activeMonthes: Array<Month> = [
         {
-            name: "may",
-            num: 4,
-        },
-        {
             name: "june",
             num: 5,
         },
@@ -27,12 +23,7 @@ export default function Home() {
             name: "august",
             num: 7,
         },
-        {
-            name: "september",
-            num: 8,
-        },
     ];
-    console.log(new Date().getMonth()); // отсчет месяцев начинается с 0 - январь, сделать проверку на исключение месяцев, которые прошли
     return (
         <main
             className={Styles["main"]}

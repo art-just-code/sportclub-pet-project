@@ -15,8 +15,8 @@ interface CalendarParams {
 }
 
 type RentData = {
-    date?: string;
-    current?: number;
+    date: string;
+    count: string;
     month?: any; // позже убрать
     user?: any; // позже убрать
 };
@@ -30,8 +30,6 @@ export const Calendar: React.FC<CalendarParams> = ({
     const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // хук создания календаря
     const data: Array<RentData> = useGetDataByMonth(endpoints.dates, monthName); // получение данных для конкретного месяца, добавить мемоизацию?
     console.log(data);
-    //if (data.length > 0) const rentData: Array<RentData> = data.map((obj) => {date = obj.date, current = obj.current});
-
     return (
         <div className={Styles["calendar"]}>
             <div className={Styles["calendar__header"]}>
