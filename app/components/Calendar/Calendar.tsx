@@ -7,13 +7,6 @@ import { DayItem } from "../DayItem/DayItem";
 import { useGetDataByMonth } from "@/app/api/api-hooks";
 import { endpoints } from "@/app/api/config";
 
-interface CalendarParams {
-    locale?: string;
-    firstWeekDay?: number;
-    currentMonth: number;
-    monthName: string;
-}
-
 type RentData = {
     date: string;
     count: string;
@@ -21,15 +14,24 @@ type RentData = {
     user?: any; // позже убрать
 };
 
+interface CalendarParams {
+    locale?: string;
+    firstWeekDay?: number;
+    currentMonth: number;
+    monthData: Array<RentData>;
+}
+
 export const Calendar: React.FC<CalendarParams> = ({
     locale = "default",
     firstWeekDay = 2,
     currentMonth,
-    monthName,
+    monthData,
+    //monthName
 }) => {
     const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // хук создания календаря
-    const data: Array<RentData> = useGetDataByMonth(endpoints.dates, monthName); // получение данных для конкретного месяца, добавить мемоизацию?
-    console.log(data);
+    //const data: Array<RentData> = useGetDataByMonth(endpoints.dates, monthName); // получение данных для конкретного месяца, добавить мемоизацию?
+    console.log(monthData);
+
     return (
         <div className={Styles["calendar"]}>
             <div className={Styles["calendar__header"]}>
@@ -38,7 +40,7 @@ export const Calendar: React.FC<CalendarParams> = ({
                 </h3>
             </div>
             <div className={Styles["calendar__body"]}>
-                {data ? (
+                {monthData ? (
                     <>
                         <div className={Styles["calendar__week__names"]}>
                             {state.weekDaysNames.map((weekDaysNames) => (
@@ -55,7 +57,6 @@ export const Calendar: React.FC<CalendarParams> = ({
                                         selectedMonthIndex={currentMonth}
                                         dayNumber={day.dayNumber}
                                         locale={locale}
-                                        rentData={2}
                                     />
                                 );
                             })}

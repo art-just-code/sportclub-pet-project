@@ -11,7 +11,6 @@ interface DayItemParams {
     selectedMonthIndex: number;
     dayNumber: number;
     locale: string;
-    rentData: number;
 }
 
 export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMonthIndex, dayNumber, locale }) => {

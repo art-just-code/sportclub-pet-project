@@ -15,7 +15,12 @@ export const isResponseOk = (response: any) => {
     return !(response instanceof Error);
 };
 
-export const getNormalizedDataByMonth = async (url: string, month: string) => {
-    const data = await getData(`${url}?month.name=${month}`);
-    return isResponseOk(data) ? data : data;
+// получение данных по конкретному месяцу
+export const getDataByMonth = async (url: string, month: string) => {
+    try {
+        const data = await getData(`${url}?month.name=${month}`);
+        return data;
+    } catch (error) {
+        return error;
+    }
 };
