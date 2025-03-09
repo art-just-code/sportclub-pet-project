@@ -4,8 +4,8 @@ import Styles from "./Calendar.module.css";
 import { useCalendar } from "@/app/utils/hooks/useCalendar";
 import { Preloader } from "../Preloader/Preloader";
 import { DayItem } from "../DayItem/DayItem";
-import { useGetDataByMonth } from "@/app/api/api-hooks";
-import { endpoints } from "@/app/api/config";
+//import { useGetDataByMonth } from "@/app/api/api-hooks";
+//import { endpoints } from "@/app/api/config";
 
 type RentData = {
     date: string;
@@ -18,19 +18,18 @@ interface CalendarParams {
     locale?: string;
     firstWeekDay?: number;
     currentMonth: number;
-    monthData: Array<RentData>;
+    monthRentData: Array<RentData>;
 }
 
 export const Calendar: React.FC<CalendarParams> = ({
     locale = "default",
     firstWeekDay = 2,
     currentMonth,
-    monthData,
+    monthRentData,
     //monthName
 }) => {
-    const { state } = useCalendar({ firstWeekDay, locale, currentMonth }); // хук создания календаря
+    const { state } = useCalendar({ firstWeekDay, locale, currentMonth, monthRentData }); // хук создания календаря
     //const data: Array<RentData> = useGetDataByMonth(endpoints.dates, monthName); // получение данных для конкретного месяца, добавить мемоизацию?
-    console.log(monthData);
 
     return (
         <div className={Styles["calendar"]}>
@@ -40,7 +39,7 @@ export const Calendar: React.FC<CalendarParams> = ({
                 </h3>
             </div>
             <div className={Styles["calendar__body"]}>
-                {monthData ? (
+                {monthRentData ? (
                     <>
                         <div className={Styles["calendar__week__names"]}>
                             {state.weekDaysNames.map((weekDaysNames) => (

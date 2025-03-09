@@ -64,11 +64,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
+    margin: 0 0.5em 1em;
     background: url("/images/main.webp") no-repeat;
     background-size: cover;
     background-position: center;
-    width: 100%;
+    width: auto;
     min-height: 85svh;
     background-blend-mode: multiply;
     background-color: #bcbcbc;

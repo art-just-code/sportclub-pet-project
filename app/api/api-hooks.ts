@@ -15,6 +15,7 @@ export const useGetData = (endpoint: string) => {
     return data;
 };
 
+// убрал, если не будет использована - позже можно удалить
 export const useGetDataByMonth = (endpoint: string, month: string) => {
     const [data, setData] = useState([]);
 

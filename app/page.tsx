@@ -5,21 +5,21 @@ import { Calendar } from "./components/Calendar/Calendar";
 import { useGetData } from "@/app/api/api-hooks";
 import { endpoints } from "@/app/api/config";
 
-type Month = {
+interface AvailableMonth {
     name: string;
     num: number;
-};
+}
 
-type RentData = {
+interface RentData {
     date: string;
     count: string;
     month?: any; // позже убрать
     user?: any; // позже убрать
-};
+}
 
 export default function Home() {
     /* здесь должно быть получение данных конфигураций и функция, не прошел ли месяц*/
-    const activeMonthes: Array<Month> = [
+    const activeMonthes: Array<AvailableMonth> = [
         {
             name: "june",
             num: 5,
@@ -47,7 +47,7 @@ export default function Home() {
                         currentMonth={obj.num}
                         key={obj.num}
                         // monthName={obj.name}
-                        monthData={data.filter((rent) => obj.name === rent.month.name)}
+                        monthRentData={data.filter((rent) => obj.name === rent.month.name)}
                     />
                 );
             })}

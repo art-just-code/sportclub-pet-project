@@ -18,13 +18,14 @@ export const DayItem: React.FC<DayItemParams> = ({ date, monthIndex, selectedMon
 
     const isToday = checkIsToday(date);
     const isAdditionalDay = monthIndex !== selectedMonthIndex;
-    //console.log(date.toLocaleDateString(locale));
+
+    const handleClick = () => {
+        dispatch(selectDate(date.toLocaleDateString(locale)));
+        dispatch(changePopupIsOpen(true));
+    };
     return (
         <div
-            onClick={() => {
-                dispatch(selectDate(date.toLocaleDateString(locale)));
-                dispatch(changePopupIsOpen(true));
-            }}
+            onClick={!isAdditionalDay ? handleClick : undefined} // убираем обработчик клика для добавочных дней
             className={`${Styles["calendar__day"]}
             ${isToday ? Styles["calendar__today__item"] : ""} 
             ${isAdditionalDay ? Styles["calendar__additional__day"] : ""}`}

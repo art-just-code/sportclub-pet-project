@@ -30,7 +30,7 @@ export const RentForm: React.FC = () => {
         >
             <h2 className={Styles["form__title"]}>Окно аренды на {storeDate}</h2>
             <div className={Styles["form__fields"]}>
-                <label className={Styles["form__field-title"]}>Ваш номер мобильного телефона</label>
+                <label className={Styles["form__field-title"]}>Ваш номер телефона для связи</label>
                 <input
                     onChange={(e) => handleInput(e)}
                     value={rentData.phone}
